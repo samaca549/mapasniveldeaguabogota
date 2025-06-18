@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Inicio - Sistema de Monitoreo</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      text-align: center;
-      padding: 100px;
-    }
-    h1 {
-      color: #333;
-    }
-    .button {
-      background-color: #008CBA;
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      margin: 20px;
-      text-align: center;
-      text-decoration: none;
-      font-size: 18px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .button:hover {
-      background-color: #005f73;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión del Riesgo por Inundaciones</title>
+  <link rel="stylesheet" href="estilos.css" />
 </head>
 <body>
-  <h1>Sistema de Monitoreo</h1>
-  <a href="mapa_completo_riesgo_clima.html" class="button">🌍 Ver Mapa</a>
-  <a href="datos_thingspeak.html" class="button">📊 Ver Datos ThingSpeak</a>
+  <header>
+    <h1>Gestión del Riesgo por Inundaciones</h1>
+    <p>Datos en tiempo real para prevenir y monitorear inundaciones en Bogotá</p>
+  </header>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="https://es.wikipedia.org/wiki/Inundaci%C3%B3n" target="_blank">¿Qué es una Inundación?</a></li>
+      <li><a href="https://datosabiertos.bogota.gov.co/dataset/registro-de-eventos-por-inundaciones" target="_blank">Estadísticas</a></li>
+      <li><a href="https://www.sgc.gov.co/ambiente/Paginas/inundaciones.aspx" target="_blank">Prevención</a></li>
+    </ul>
+  </nav>
+
+  <section class="botones-principales">
+    <a class="boton" href="mapa_completo_riesgo_clima.html">🗺️ Mapa Interactivo</a>
+    <a class="boton" href="https://thingspeak.com/channels/2293571" target="_blank">📡 Datos en Vivo</a>
+  </section>
+
+  <footer>
+    <p>© 2025 Monitoreo de Inundaciones en Bogotá | Fuentes: IDIGER, IDEAM, UNGRD</p>
+  </footer>
 </body>
 </html>
 
