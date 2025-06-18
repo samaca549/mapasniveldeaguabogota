@@ -228,5 +228,5 @@ macro._template = Template(leyenda)
 m.get_root().add_child(macro)
 
 # === GUARDAR MAPA ===
-m.save("mapa_profesional_completo.html")
-print("✅ Mapa completo generado: 'mapa_profesional_completo.html'")
+m.save("mapa_completo_riesgo_clima.html")
+print("✅ Mapa completo generado: 'mapa_completo_riesgo_clima.html'")
