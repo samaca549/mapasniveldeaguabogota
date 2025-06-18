@@ -80,4 +80,55 @@ footer {
   padding: 1rem;
   font-size: 0.9rem;
 }
+nav ul {
+  list-style: none; /* Quita las viñetas */
+  display: flex;     /* Pone los ítems en línea horizontal */
+  justify-content: center; /* Centra el menú */
+  padding: 0;
+  margin: 0;
+  background-color: #023e8a;
+}
+
+nav li {
+  margin: 0 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.8rem 1rem;
+  display: block;
+}
+
+nav a:hover {
+  background-color: #0077b6;
+  border-radius: 5px;
+}
+nav ul {
+  list-style: none; /* Quita las viñetas */
+  display: flex;     /* Pone los ítems en línea horizontal */
+  justify-content: center; /* Centra el menú */
+  padding: 0;
+  margin: 0;
+  background-color: #023e8a;
+}
+
+nav li {
+  margin: 0 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.8rem 1rem;
+  display: block;
+}
+
+nav a:hover {
+  background-color: #0077b6;
+  border-radius: 5px;
+}
+
 
