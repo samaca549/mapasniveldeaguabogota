@@ -1,80 +1,83 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  background: #f2f7fb;
-  color: #333;
+  background-color: #f0f8ff;
+  color: #002244;
+  line-height: 1.6;
 }
 
-.main-header {
-  background: linear-gradient(to right, #0077b6, #00b4d8);
+/* Encabezado principal */
+header {
+  background: #0099cc;
   color: white;
+  padding: 2rem;
   text-align: center;
-  padding: 2rem 1rem;
 }
 
-.sub-nav {
+header h1 {
+  font-size: 2.5rem;
+}
+
+header p {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+/* Barra de navegación */
+nav {
+  background: #003366;
   display: flex;
   justify-content: center;
   gap: 2rem;
-  background-color: #002b5c;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
-.sub-nav a {
+nav a {
   color: white;
-  font-weight: bold;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
-.sub-nav a:hover {
-  color: #90e0ef;
+nav a:hover {
+  color: #00ccff;
 }
 
-main {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
+/* Botones especiales */
 .botones-principales {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
+  margin: 3rem 0;
 }
 
-.big-button {
+.boton {
   background-color: #0077b6;
   color: white;
-  padding: 2rem;
-  text-align: center;
-  font-size: 1.2rem;
-  border-radius: 12px;
+  padding: 1rem 2rem;
+  border-radius: 10px;
   text-decoration: none;
-  width: 250px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
-.big-button:hover {
-  background-color: #023e8a;
+.boton:hover {
+  background-color: #005f8a;
 }
 
-section {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
+/* Footer */
 footer {
-  background: #003566;
+  background: #003366;
   color: white;
   text-align: center;
   padding: 1rem;
   font-size: 0.9rem;
-  margin-top: 3rem;
 }
+
