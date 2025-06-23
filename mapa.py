@@ -111,6 +111,12 @@ nivel_agua = [
 
 
 ]
+# === DETECCIÓN DE PUNTOS CRÍTICOS AUTOMÁTICA ===
+puntos_criticos = sorted(
+    [p for p in nivel_agua if p["nivel"] >= 60],
+    key=lambda x: x["nivel"],
+    reverse=True
+)
 
 # === PUNTOS DE CLIMA POR LOCALIDAD ===
 puntos_clima = {
@@ -181,12 +187,13 @@ iconos_clima = {
 for localidad, coords_list in puntos_clima.items():
     for lat, lon in coords_list:
         try:
-            url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_KEY}&units=metric"
+            url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_KEY}&units=metric&lang=es"
             r = requests.get(url)
             data = r.json()
             lluvia = data.get("clouds", {}).get("all", 0)
             temp = data.get("main", {}).get("temp", 0)
-            clima_main = data.get("weather", [{}])[0].get("main", "").lower()
+            clima_main = data.get("weather", [{}])[0].get("description", "").capitalize()
+
         except:
             lluvia = temp = 0
             clima_main = ""
@@ -209,7 +216,7 @@ folium.LayerControl(collapsed=False).add_to(m)
 # === LEYENDA ===
 leyenda = """
 {% macro html(this, kwargs) %}
-<div style="position: fixed; bottom: 50px; left: 50px; width: 240px; height: 180px;
+<div style="position: fixed; bottom: 50px; left: 50px; width: 240px; height: 200px;
      background-color: white; z-index:9999; font-size:14px;
      border:2px solid grey; padding: 10px;">
 <b>Leyenda de Riesgo</b><br>
@@ -226,6 +233,82 @@ leyenda = """
 macro = MacroElement()
 macro._template = Template(leyenda)
 m.get_root().add_child(macro)
+
+
+
+# === TOP 10 PUNTOS CRÍTICOS DE INUNDACIÓN ===
+top10_criticos = sorted(
+    [p for p in nivel_agua if p["nivel"] >= 60],
+    key=lambda x: x["nivel"],
+    reverse=True
+)[:10]  # solo los 10 más críticos
+
+# === TABLA FLOTANTE MEJORADA, ESTÉTICA, OCULTABLE Y CON ZOOM INTERACTIVO ===
+from branca.element import Template, MacroElement, Element
+
+# HTML para la tabla con botón de ocultar/mostrar
+tabla_html = """
+{% macro html(this, kwargs) %}
+<div style="position: fixed; bottom: 30px; right: 30px; z-index:9999; font-size: 14px;">
+    <button onclick="toggleTabla()" style="padding:4px 8px; margin-bottom:5px;">Mostrar/Ocultar Críticos</button>
+    <div id="tablaCriticos" style="
+            width: 300px; height: auto;
+            background-color: white;
+            border:2px solid gray; padding:10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);">
+        <b>🔴 Puntos Críticos</b><br>
+        <ul style='list-style:none; padding:0; margin:0;'>
+""" + "\n".join([
+    f"<li class='critical-point' style='cursor:pointer; margin:4px 0;' data-lat='{p['lat']}' data-lon='{p['lon']}'>📍 {p['nombre']} ({p['nivel']} cm)</li>"
+    for p in puntos_criticos[:10]
+]) + """
+        </ul>
+    </div>
+</div>
+{% endmacro %}
+"""
+
+# Añadir la tabla como un MacroElement
+tabla_template = Template(tabla_html)
+tabla_elemento = MacroElement()
+tabla_elemento._template = tabla_template
+m.get_root().add_child(tabla_elemento)
+
+# Script JS para manejar clics y ocultar/mostrar tabla
+script_js = Element("""
+<script>
+    // Espera a que el DOM cargue
+    document.addEventListener("DOMContentLoaded", function() {
+        const map = window._map || Object.values(window).find(v => v instanceof L.Map);
+        window._map = map;
+
+        document.querySelectorAll('.critical-point').forEach(function(el) {
+            el.addEventListener('click', function() {
+                const lat = parseFloat(this.getAttribute('data-lat'));
+                const lon = parseFloat(this.getAttribute('data-lon'));
+                if (map) {
+                    map.setView([lat, lon], 15, {
+                        animate: true,
+                        duration: 1.5
+                    });
+                }
+            });
+        });
+    });
+
+    function toggleTabla() {
+        const tabla = document.getElementById("tablaCriticos");
+        if (tabla.style.display === "none") {
+            tabla.style.display = "block";
+        } else {
+            tabla.style.display = "none";
+        }
+    }
+</script>
+""")
+m.get_root().html.add_child(script_js)
+
+
 
 # === GUARDAR MAPA ===
 m.save("mapa_profesional_completo.html")
