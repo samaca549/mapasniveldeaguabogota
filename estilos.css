@@ -78,3 +78,23 @@ footer {
   font-size: 0.9rem;
   margin-top: 3rem;
 }
+@media screen and (max-width: 768px) {
+  iframe {
+    height: 300px;
+  }
+
+  #alerta {
+    font-size: 16px;
+    padding: 10px;
+    top: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .big-button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
