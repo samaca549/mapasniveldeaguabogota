@@ -95,7 +95,7 @@
         const nivel = parseFloat(data.field1);
         const alerta = document.getElementById('alerta');
 
-        if (nivel >= 60) {
+        if (nivel <= 10) {
           alerta.style.display = 'block';
         } else {
           alerta.style.display = 'none';
