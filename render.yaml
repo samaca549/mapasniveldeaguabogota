@@ -3,6 +3,6 @@ services:
     name: mapa-interactivo-bogota
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn servidor_flask:app"
+    startCommand: "python servidor_flask.py"
     autoDeploy: true
     plan: free
