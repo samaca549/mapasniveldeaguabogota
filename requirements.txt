@@ -1,6 +1,4 @@
-flask
 folium
+flask
 requests
-gunicorn
-python-dotenv
-
+branca

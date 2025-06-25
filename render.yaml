@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: mapa-interactivo-bogota
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python mapa.py"
+    autoDeploy: true
+    plan: free
