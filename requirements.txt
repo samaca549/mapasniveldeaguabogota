@@ -2,3 +2,5 @@ folium
 flask
 requests
 branca
+gunicorn
+
